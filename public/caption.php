@@ -25,8 +25,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $imageData);
 
 // 執行請求
 $response = curl_exec($ch);
-
+echo $response;
 $result = json_decode($response, true);
+print_r($result);
 $caption = $result[0]['generated_text'] ?? '未能產生描述';
 
 header('Location: /?caption=' . urlencode($caption));
