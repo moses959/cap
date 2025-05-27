@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>圖片標籤生成器</h1>
-    <form action="/api/caption.php" method="post" enctype="multipart/form-data">
+    <form action="/caption.php" method="post" enctype="multipart/form-data">
         <input type="file" name="image" accept="image/*" required onchange="previewImage(event)">
         <br><br>
         <img id="preview" src="#" alt="預覽圖片" style="max-width:300px; display:none;"/>
