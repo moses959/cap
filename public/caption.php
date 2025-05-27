@@ -7,7 +7,7 @@ if (!isset($_FILES['image'])) {
     die('請上傳圖片');
 }
 $apiToken = $_ENV['HUGGINGFACE_API_TOKEN'];
-echo $apiToken;
+//echo $apiToken;
 $tmpFile = $_FILES['image']['tmp_name'];
 $imageData = file_get_contents($tmpFile);
 
