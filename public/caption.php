@@ -30,3 +30,4 @@ $result = json_decode($response, true);
 $caption = $result[0]['generated_text'] ?? '未能產生描述';
 
 header('Location: /?caption=' . urlencode($caption));
+?>
