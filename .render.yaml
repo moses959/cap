@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: image-caption-generator
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: HUGGINGFACE_API_TOKEN
+        value: your_token_here
