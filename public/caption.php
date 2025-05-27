@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+//require __DIR__ . '/../vendor/autoload.php';
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 
 if (!isset($_FILES['image'])) {
     die('請上傳圖片');
@@ -10,16 +10,22 @@ if (!isset($_FILES['image'])) {
 $tmpFile = $_FILES['image']['tmp_name'];
 $imageData = file_get_contents($tmpFile);
 
-$client = new Client();
-$response = $client->request('POST', 'https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning', [
-    'headers' => [
-        'Authorization' => 'Bearer ' . getenv('HUGGINGFACE_API_TOKEN'),
-        'Content-Type' => 'application/octet-stream'
-    ],
-    'body' => $imageData
-]);
+$ch = curl_init();
 
-$result = json_decode($response->getBody(), true);
+// 設定 cURL 選項
+curl_setopt($ch, CURLOPT_URL, 'https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $apiToken,
+    'Content-Type: application/octet-stream'
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $imageData);
+
+// 執行請求
+$response = curl_exec($ch);
+
+$result = json_decode($response, true);
 $caption = $result[0]['generated_text'] ?? '未能產生描述';
 
 header('Location: /?caption=' . urlencode($caption));
