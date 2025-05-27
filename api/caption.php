@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+//require __DIR__ . '/../vendor/autoload.php';
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 
 if (!isset($_FILES['image'])) {
     die('請上傳圖片');
